@@ -109,10 +109,14 @@ $(document).ready(function() {
     $('body').unbind('click.kp');
   }
 
-  $(document).on("click", '.kolorPicker', function () { 
+  $(document).on("click", '.kolorPicker', function () {
+    var elem = $(this);
+    elem.css('background-color', elem.val());
+    elem.trigger('colorPickerOpen');
     $('body').bind('click.kp', function (ev) {
       if (!($(ev.target).parents().is(".kolorPicker-wrapper") || $(ev.target).is(".kolorPicker-wrapper"))) {
         cleanPicker();
+        elem.trigger('colorPickerClose');
       }
     });
 
