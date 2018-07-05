@@ -107,16 +107,17 @@ $(document).ready(function() {
     $('.kolorPicker').parent().removeAttr('style');
 
     $('body').unbind('click.kp');
+    $('.kolorPicker').trigger('kolorPickerUpdate');
   }
 
   $(document).on("click", '.kolorPicker', function () {
     var elem = $(this);
     elem.css('background-color', elem.val());
-    elem.trigger('colorPickerOpen');
+    elem.trigger('kolorPickerOpen');
     $('body').bind('click.kp', function (ev) {
       if (!($(ev.target).parents().is(".kolorPicker-wrapper") || $(ev.target).is(".kolorPicker-wrapper"))) {
         cleanPicker();
-        elem.trigger('colorPickerClose');
+        elem.trigger('kolorPickerClose');
       }
     });
 
@@ -166,6 +167,8 @@ $(document).ready(function() {
     $(input).val(color);
 
     $(input).change();
+
+    $('.kolorPicker').trigger('kolorPickerUpdate');
   });
 
   $(document).on("click", 'ul.palette-select li', function(){
